@@ -17,9 +17,14 @@ Score::Score( const std::string& fileName ) {
 		throw new std::runtime_error( "Unable to read the score." );
 	}
 
+	int unit;
+	file >> unit;
+
 	while ( !file.eof( )) {
 		Note note;
 		file >> note;
+
+		note.duration *= unit;
 
 		_notes.push_back( note );
 	}
