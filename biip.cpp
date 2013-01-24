@@ -70,12 +70,12 @@ void Biip::playNote( const Note& note ) {
  *
  */
 
-void Biip::playScore( const Score& score ) {
+void Biip::playScore( const Score& score, int repeat ) {
 
-	for ( int i = 0; i < score.noteCount( ); ++i ) {
-		playNote( score.note( i ));
-
-		//std::cout << note.frequency << ' ' << note.duration << std::endl;
+	for ( int r = 0; r < repeat; ++r ) {
+		for ( int i = 0; i < score.noteCount( ); ++i ) {
+			playNote( score.note( i ));
+		}
 	}
 }
 

@@ -21,7 +21,7 @@ class Biip {
 		~Biip( );
 
 		void playNote( const Note& note );
-		void playScore( const Score& score );
+		void playScore( const Score& score, int repeat = 1 );
 
 	private:
 
