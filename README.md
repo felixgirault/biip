@@ -2,5 +2,5 @@ Biip
 ====
 
 ```
-sudo ./biip scores/win.txt
+sudo ./biip scores/tron.txt 2
 ```
