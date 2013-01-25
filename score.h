@@ -23,6 +23,10 @@ class Score {
 
 	private:
 
+		void _load( std::string fileName );
+
+	private:
+
 		std::vector< Note > _notes;
 
 };
