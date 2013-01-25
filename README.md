@@ -14,16 +14,14 @@ make
 ./biip scores/tron.txt 4
 ```
 
-Linux
------
+### Linux
 
-You should edit the modprobe blacklist in order to have your motherboard speaker working.
-Just comment out this line `blacklist pcspkr`.
+You should edit the modprobe blacklist (/etc/modprobe.d/blacklist.conf) in order to have your motherboard speaker working.
+Just comment out this line: `blacklist pcspkr`.
 
 Then, run biip as root.
 
-Windows
--------
+### Windows
 
 Not tested yet, but should work !
 
@@ -47,12 +45,13 @@ G#4	1
 A4	1
 A#4	1
 B4	1
+C5	4
 ```
 
 The first line sets the base unit of time in milliseconds.
 Then, each line represents a single note, identified by it's name and duration (multiple of base time unit).
 
-In the above example, biip would play each note of the 4th octave for 100ms.
+In the above example, biip would play each note of the 4th octave for 100ms, and a C of the 5th octave for 400ms.
 
 ### Notes
 
