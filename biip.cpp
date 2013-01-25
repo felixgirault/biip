@@ -1,12 +1,3 @@
-#include <stdexcept>
-#ifdef __linux__
-#include <fcntl.h>
-#include <sys/ioctl.h>
-#include <linux/kd.h>
-#elif defined _WIN32 || defined _WIN64
-#include <windows.h>
-#endif
-
 #include "biip.h"
 
 
@@ -18,27 +9,6 @@
 Biip::Biip( ) {
 
 	_loadFrequencies( );
-
-#ifdef __linux__
-	_tty = open( "/dev/tty10", O_WRONLY );
-
-	if ( _tty == -1 ) {
-		throw new std::runtime_error( "Unable to use the beeper." );
-	}
-#endif
-}
-
-
-
-/**
- *
- */
-
-Biip::~Biip( ) {
-
-#ifdef __linux__
-	close( _tty );
-#endif
 }
 
 
@@ -49,18 +19,12 @@ Biip::~Biip( ) {
 
 void Biip::playNote( const Note& note ) {
 
-	if ( note.name == "S" ) {
-		usleep( 1000 * note.duration );
-	} else {
-		float frequency = _frequencies[ note.name ];
+	std::map< std::string, float >::iterator it = _frequencies.find( note.name );
 
-#ifdef __linux__
-		ioctl( _tty, KIOCSOUND, ( int )( 1193180 / frequency ));
-		usleep( 1000 * note.duration );
-		ioctl( _tty, KIOCSOUND, 0 );
-#elif defined _WIN32 || defined _WIN64
-		Beep( frequency, note.duration );
-#endif
+	if (( note.name == "S" ) || ( it == _frequencies.end( ))) {
+		_speaker.pause( note.duration );
+	} else {
+		_speaker.beep( it->second, note.duration );
 	}
 }
 

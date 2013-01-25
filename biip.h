@@ -6,6 +6,7 @@
 
 #include "note.h"
 #include "score.h"
+#include "speaker.h"
 
 
 
@@ -18,7 +19,6 @@ class Biip {
 	public:
 
 		Biip( );
-		~Biip( );
 
 		void playNote( const Note& note );
 		void playScore( const Score& score, int repeat = 1 );
@@ -29,9 +29,7 @@ class Biip {
 
 	private:
 
-#ifdef __linux__
-		int _tty;
-#endif
+		Speaker _speaker;
 		std::map< std::string, float > _frequencies;
 
 };
