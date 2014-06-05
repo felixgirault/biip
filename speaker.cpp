@@ -2,6 +2,7 @@
 #ifdef __linux__
 #include <fcntl.h>
 #include <sys/ioctl.h>
+#include <unistd.h>
 #include <linux/kd.h>
 #elif defined _WIN32 || defined _WIN64
 #include <windows.h>
